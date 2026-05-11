@@ -7,6 +7,6 @@ abstract class DictionaryChopperService extends ChopperService {
   static DictionaryChopperService create([ChopperClient? client]) =>
       _$DictionaryChopperService(client);
 
-  @Method('GET', path: '/{word}')
+  @GET(path: '/{word}')
   Future<Response<dynamic>> getWord(@Path('word') String word);
 }

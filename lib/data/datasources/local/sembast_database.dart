@@ -96,6 +96,11 @@ class SembastDatabase {
     return records.map((r) => r.key).toList();
   }
   
+   Future<List<String>> getCachedWordKeys() async {
+    final records = await _wordsStore.find(db);
+    return records.map((r) => r.key).toList();
+  }
+  
   //bookmark
 
   Future<void> addBookmark(String word) async {

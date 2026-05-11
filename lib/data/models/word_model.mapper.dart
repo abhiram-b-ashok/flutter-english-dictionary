@@ -8,6 +8,200 @@
 
 part of 'word_model.dart';
 
+class WordModelMapper extends ClassMapperBase<WordModel> {
+  WordModelMapper._();
+
+  static WordModelMapper? _instance;
+  static WordModelMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = WordModelMapper._());
+      PhoneticModelMapper.ensureInitialized();
+      MeaningModelMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'WordModel';
+
+  static String _$word(WordModel v) => v.word;
+  static const Field<WordModel, String> _f$word = Field('word', _$word);
+  static String? _$phonetic(WordModel v) => v.phonetic;
+  static const Field<WordModel, String> _f$phonetic = Field(
+    'phonetic',
+    _$phonetic,
+    opt: true,
+  );
+  static List<PhoneticModel> _$phonetics(WordModel v) => v.phonetics;
+  static const Field<WordModel, List<PhoneticModel>> _f$phonetics = Field(
+    'phonetics',
+    _$phonetics,
+    opt: true,
+    def: const [],
+  );
+  static List<MeaningModel> _$meanings(WordModel v) => v.meanings;
+  static const Field<WordModel, List<MeaningModel>> _f$meanings = Field(
+    'meanings',
+    _$meanings,
+    opt: true,
+    def: const [],
+  );
+
+  @override
+  final MappableFields<WordModel> fields = const {
+    #word: _f$word,
+    #phonetic: _f$phonetic,
+    #phonetics: _f$phonetics,
+    #meanings: _f$meanings,
+  };
+
+  static WordModel _instantiate(DecodingData data) {
+    return WordModel(
+      word: data.dec(_f$word),
+      phonetic: data.dec(_f$phonetic),
+      phonetics: data.dec(_f$phonetics),
+      meanings: data.dec(_f$meanings),
+    );
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static WordModel fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<WordModel>(map);
+  }
+
+  static WordModel fromJson(String json) {
+    return ensureInitialized().decodeJson<WordModel>(json);
+  }
+}
+
+mixin WordModelMappable {
+  String toJson() {
+    return WordModelMapper.ensureInitialized().encodeJson<WordModel>(
+      this as WordModel,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return WordModelMapper.ensureInitialized().encodeMap<WordModel>(
+      this as WordModel,
+    );
+  }
+
+  WordModelCopyWith<WordModel, WordModel, WordModel> get copyWith =>
+      _WordModelCopyWithImpl<WordModel, WordModel>(
+        this as WordModel,
+        $identity,
+        $identity,
+      );
+  @override
+  String toString() {
+    return WordModelMapper.ensureInitialized().stringifyValue(
+      this as WordModel,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return WordModelMapper.ensureInitialized().equalsValue(
+      this as WordModel,
+      other,
+    );
+  }
+
+  @override
+  int get hashCode {
+    return WordModelMapper.ensureInitialized().hashValue(this as WordModel);
+  }
+}
+
+extension WordModelValueCopy<$R, $Out> on ObjectCopyWith<$R, WordModel, $Out> {
+  WordModelCopyWith<$R, WordModel, $Out> get $asWordModel =>
+      $base.as((v, t, t2) => _WordModelCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class WordModelCopyWith<$R, $In extends WordModel, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<
+    $R,
+    PhoneticModel,
+    PhoneticModelCopyWith<$R, PhoneticModel, PhoneticModel>
+  >
+  get phonetics;
+  ListCopyWith<
+    $R,
+    MeaningModel,
+    MeaningModelCopyWith<$R, MeaningModel, MeaningModel>
+  >
+  get meanings;
+  $R call({
+    String? word,
+    String? phonetic,
+    List<PhoneticModel>? phonetics,
+    List<MeaningModel>? meanings,
+  });
+  WordModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _WordModelCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, WordModel, $Out>
+    implements WordModelCopyWith<$R, WordModel, $Out> {
+  _WordModelCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<WordModel> $mapper =
+      WordModelMapper.ensureInitialized();
+  @override
+  ListCopyWith<
+    $R,
+    PhoneticModel,
+    PhoneticModelCopyWith<$R, PhoneticModel, PhoneticModel>
+  >
+  get phonetics => ListCopyWith(
+    $value.phonetics,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(phonetics: v),
+  );
+  @override
+  ListCopyWith<
+    $R,
+    MeaningModel,
+    MeaningModelCopyWith<$R, MeaningModel, MeaningModel>
+  >
+  get meanings => ListCopyWith(
+    $value.meanings,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(meanings: v),
+  );
+  @override
+  $R call({
+    String? word,
+    Object? phonetic = $none,
+    List<PhoneticModel>? phonetics,
+    List<MeaningModel>? meanings,
+  }) => $apply(
+    FieldCopyWithData({
+      if (word != null) #word: word,
+      if (phonetic != $none) #phonetic: phonetic,
+      if (phonetics != null) #phonetics: phonetics,
+      if (meanings != null) #meanings: meanings,
+    }),
+  );
+  @override
+  WordModel $make(CopyWithData data) => WordModel(
+    word: data.get(#word, or: $value.word),
+    phonetic: data.get(#phonetic, or: $value.phonetic),
+    phonetics: data.get(#phonetics, or: $value.phonetics),
+    meanings: data.get(#meanings, or: $value.meanings),
+  );
+
+  @override
+  WordModelCopyWith<$R2, WordModel, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  ) => _WordModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class PhoneticModelMapper extends ClassMapperBase<PhoneticModel> {
   PhoneticModelMapper._();
 
@@ -140,188 +334,6 @@ class _PhoneticModelCopyWithImpl<$R, $Out>
   PhoneticModelCopyWith<$R2, PhoneticModel, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   ) => _PhoneticModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
-class DefinitionModelMapper extends ClassMapperBase<DefinitionModel> {
-  DefinitionModelMapper._();
-
-  static DefinitionModelMapper? _instance;
-  static DefinitionModelMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals.use(_instance = DefinitionModelMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'DefinitionModel';
-
-  static String _$definition(DefinitionModel v) => v.definition;
-  static const Field<DefinitionModel, String> _f$definition = Field(
-    'definition',
-    _$definition,
-  );
-  static String? _$example(DefinitionModel v) => v.example;
-  static const Field<DefinitionModel, String> _f$example = Field(
-    'example',
-    _$example,
-    opt: true,
-  );
-  static List<String> _$synonyms(DefinitionModel v) => v.synonyms;
-  static const Field<DefinitionModel, List<String>> _f$synonyms = Field(
-    'synonyms',
-    _$synonyms,
-    opt: true,
-    def: const [],
-  );
-  static List<String> _$antonyms(DefinitionModel v) => v.antonyms;
-  static const Field<DefinitionModel, List<String>> _f$antonyms = Field(
-    'antonyms',
-    _$antonyms,
-    opt: true,
-    def: const [],
-  );
-
-  @override
-  final MappableFields<DefinitionModel> fields = const {
-    #definition: _f$definition,
-    #example: _f$example,
-    #synonyms: _f$synonyms,
-    #antonyms: _f$antonyms,
-  };
-
-  static DefinitionModel _instantiate(DecodingData data) {
-    return DefinitionModel(
-      definition: data.dec(_f$definition),
-      example: data.dec(_f$example),
-      synonyms: data.dec(_f$synonyms),
-      antonyms: data.dec(_f$antonyms),
-    );
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static DefinitionModel fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<DefinitionModel>(map);
-  }
-
-  static DefinitionModel fromJson(String json) {
-    return ensureInitialized().decodeJson<DefinitionModel>(json);
-  }
-}
-
-mixin DefinitionModelMappable {
-  String toJson() {
-    return DefinitionModelMapper.ensureInitialized()
-        .encodeJson<DefinitionModel>(this as DefinitionModel);
-  }
-
-  Map<String, dynamic> toMap() {
-    return DefinitionModelMapper.ensureInitialized().encodeMap<DefinitionModel>(
-      this as DefinitionModel,
-    );
-  }
-
-  DefinitionModelCopyWith<DefinitionModel, DefinitionModel, DefinitionModel>
-  get copyWith =>
-      _DefinitionModelCopyWithImpl<DefinitionModel, DefinitionModel>(
-        this as DefinitionModel,
-        $identity,
-        $identity,
-      );
-  @override
-  String toString() {
-    return DefinitionModelMapper.ensureInitialized().stringifyValue(
-      this as DefinitionModel,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return DefinitionModelMapper.ensureInitialized().equalsValue(
-      this as DefinitionModel,
-      other,
-    );
-  }
-
-  @override
-  int get hashCode {
-    return DefinitionModelMapper.ensureInitialized().hashValue(
-      this as DefinitionModel,
-    );
-  }
-}
-
-extension DefinitionModelValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, DefinitionModel, $Out> {
-  DefinitionModelCopyWith<$R, DefinitionModel, $Out> get $asDefinitionModel =>
-      $base.as((v, t, t2) => _DefinitionModelCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class DefinitionModelCopyWith<$R, $In extends DefinitionModel, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get synonyms;
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get antonyms;
-  $R call({
-    String? definition,
-    String? example,
-    List<String>? synonyms,
-    List<String>? antonyms,
-  });
-  DefinitionModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  );
-}
-
-class _DefinitionModelCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, DefinitionModel, $Out>
-    implements DefinitionModelCopyWith<$R, DefinitionModel, $Out> {
-  _DefinitionModelCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<DefinitionModel> $mapper =
-      DefinitionModelMapper.ensureInitialized();
-  @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get synonyms =>
-      ListCopyWith(
-        $value.synonyms,
-        (v, t) => ObjectCopyWith(v, $identity, t),
-        (v) => call(synonyms: v),
-      );
-  @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get antonyms =>
-      ListCopyWith(
-        $value.antonyms,
-        (v, t) => ObjectCopyWith(v, $identity, t),
-        (v) => call(antonyms: v),
-      );
-  @override
-  $R call({
-    String? definition,
-    Object? example = $none,
-    List<String>? synonyms,
-    List<String>? antonyms,
-  }) => $apply(
-    FieldCopyWithData({
-      if (definition != null) #definition: definition,
-      if (example != $none) #example: example,
-      if (synonyms != null) #synonyms: synonyms,
-      if (antonyms != null) #antonyms: antonyms,
-    }),
-  );
-  @override
-  DefinitionModel $make(CopyWithData data) => DefinitionModel(
-    definition: data.get(#definition, or: $value.definition),
-    example: data.get(#example, or: $value.example),
-    synonyms: data.get(#synonyms, or: $value.synonyms),
-    antonyms: data.get(#antonyms, or: $value.antonyms),
-  );
-
-  @override
-  DefinitionModelCopyWith<$R2, DefinitionModel, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _DefinitionModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class MeaningModelMapper extends ClassMapperBase<MeaningModel> {
@@ -519,198 +531,186 @@ class _MeaningModelCopyWithImpl<$R, $Out>
   ) => _MeaningModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class WordModelMapper extends ClassMapperBase<WordModel> {
-  WordModelMapper._();
+class DefinitionModelMapper extends ClassMapperBase<DefinitionModel> {
+  DefinitionModelMapper._();
 
-  static WordModelMapper? _instance;
-  static WordModelMapper ensureInitialized() {
+  static DefinitionModelMapper? _instance;
+  static DefinitionModelMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = WordModelMapper._());
-      PhoneticModelMapper.ensureInitialized();
-      MeaningModelMapper.ensureInitialized();
+      MapperContainer.globals.use(_instance = DefinitionModelMapper._());
     }
     return _instance!;
   }
 
   @override
-  final String id = 'WordModel';
+  final String id = 'DefinitionModel';
 
-  static String _$word(WordModel v) => v.word;
-  static const Field<WordModel, String> _f$word = Field('word', _$word);
-  static String? _$phonetic(WordModel v) => v.phonetic;
-  static const Field<WordModel, String> _f$phonetic = Field(
-    'phonetic',
-    _$phonetic,
+  static String _$definition(DefinitionModel v) => v.definition;
+  static const Field<DefinitionModel, String> _f$definition = Field(
+    'definition',
+    _$definition,
+  );
+  static String? _$example(DefinitionModel v) => v.example;
+  static const Field<DefinitionModel, String> _f$example = Field(
+    'example',
+    _$example,
     opt: true,
   );
-  static List<PhoneticModel> _$phonetics(WordModel v) => v.phonetics;
-  static const Field<WordModel, List<PhoneticModel>> _f$phonetics = Field(
-    'phonetics',
-    _$phonetics,
+  static List<String> _$synonyms(DefinitionModel v) => v.synonyms;
+  static const Field<DefinitionModel, List<String>> _f$synonyms = Field(
+    'synonyms',
+    _$synonyms,
     opt: true,
     def: const [],
   );
-  static List<MeaningModel> _$meanings(WordModel v) => v.meanings;
-  static const Field<WordModel, List<MeaningModel>> _f$meanings = Field(
-    'meanings',
-    _$meanings,
+  static List<String> _$antonyms(DefinitionModel v) => v.antonyms;
+  static const Field<DefinitionModel, List<String>> _f$antonyms = Field(
+    'antonyms',
+    _$antonyms,
     opt: true,
     def: const [],
   );
 
   @override
-  final MappableFields<WordModel> fields = const {
-    #word: _f$word,
-    #phonetic: _f$phonetic,
-    #phonetics: _f$phonetics,
-    #meanings: _f$meanings,
+  final MappableFields<DefinitionModel> fields = const {
+    #definition: _f$definition,
+    #example: _f$example,
+    #synonyms: _f$synonyms,
+    #antonyms: _f$antonyms,
   };
 
-  static WordModel _instantiate(DecodingData data) {
-    return WordModel(
-      word: data.dec(_f$word),
-      phonetic: data.dec(_f$phonetic),
-      phonetics: data.dec(_f$phonetics),
-      meanings: data.dec(_f$meanings),
+  static DefinitionModel _instantiate(DecodingData data) {
+    return DefinitionModel(
+      definition: data.dec(_f$definition),
+      example: data.dec(_f$example),
+      synonyms: data.dec(_f$synonyms),
+      antonyms: data.dec(_f$antonyms),
     );
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static WordModel fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<WordModel>(map);
+  static DefinitionModel fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<DefinitionModel>(map);
   }
 
-  static WordModel fromJson(String json) {
-    return ensureInitialized().decodeJson<WordModel>(json);
+  static DefinitionModel fromJson(String json) {
+    return ensureInitialized().decodeJson<DefinitionModel>(json);
   }
 }
 
-mixin WordModelMappable {
+mixin DefinitionModelMappable {
   String toJson() {
-    return WordModelMapper.ensureInitialized().encodeJson<WordModel>(
-      this as WordModel,
-    );
+    return DefinitionModelMapper.ensureInitialized()
+        .encodeJson<DefinitionModel>(this as DefinitionModel);
   }
 
   Map<String, dynamic> toMap() {
-    return WordModelMapper.ensureInitialized().encodeMap<WordModel>(
-      this as WordModel,
+    return DefinitionModelMapper.ensureInitialized().encodeMap<DefinitionModel>(
+      this as DefinitionModel,
     );
   }
 
-  WordModelCopyWith<WordModel, WordModel, WordModel> get copyWith =>
-      _WordModelCopyWithImpl<WordModel, WordModel>(
-        this as WordModel,
+  DefinitionModelCopyWith<DefinitionModel, DefinitionModel, DefinitionModel>
+  get copyWith =>
+      _DefinitionModelCopyWithImpl<DefinitionModel, DefinitionModel>(
+        this as DefinitionModel,
         $identity,
         $identity,
       );
   @override
   String toString() {
-    return WordModelMapper.ensureInitialized().stringifyValue(
-      this as WordModel,
+    return DefinitionModelMapper.ensureInitialized().stringifyValue(
+      this as DefinitionModel,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return WordModelMapper.ensureInitialized().equalsValue(
-      this as WordModel,
+    return DefinitionModelMapper.ensureInitialized().equalsValue(
+      this as DefinitionModel,
       other,
     );
   }
 
   @override
   int get hashCode {
-    return WordModelMapper.ensureInitialized().hashValue(this as WordModel);
+    return DefinitionModelMapper.ensureInitialized().hashValue(
+      this as DefinitionModel,
+    );
   }
 }
 
-extension WordModelValueCopy<$R, $Out> on ObjectCopyWith<$R, WordModel, $Out> {
-  WordModelCopyWith<$R, WordModel, $Out> get $asWordModel =>
-      $base.as((v, t, t2) => _WordModelCopyWithImpl<$R, $Out>(v, t, t2));
+extension DefinitionModelValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DefinitionModel, $Out> {
+  DefinitionModelCopyWith<$R, DefinitionModel, $Out> get $asDefinitionModel =>
+      $base.as((v, t, t2) => _DefinitionModelCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class WordModelCopyWith<$R, $In extends WordModel, $Out>
+abstract class DefinitionModelCopyWith<$R, $In extends DefinitionModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<
-    $R,
-    PhoneticModel,
-    PhoneticModelCopyWith<$R, PhoneticModel, PhoneticModel>
-  >
-  get phonetics;
-  ListCopyWith<
-    $R,
-    MeaningModel,
-    MeaningModelCopyWith<$R, MeaningModel, MeaningModel>
-  >
-  get meanings;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get synonyms;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get antonyms;
   $R call({
-    String? word,
-    String? phonetic,
-    List<PhoneticModel>? phonetics,
-    List<MeaningModel>? meanings,
+    String? definition,
+    String? example,
+    List<String>? synonyms,
+    List<String>? antonyms,
   });
-  WordModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  DefinitionModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+    Then<$Out2, $R2> t,
+  );
 }
 
-class _WordModelCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, WordModel, $Out>
-    implements WordModelCopyWith<$R, WordModel, $Out> {
-  _WordModelCopyWithImpl(super.value, super.then, super.then2);
+class _DefinitionModelCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DefinitionModel, $Out>
+    implements DefinitionModelCopyWith<$R, DefinitionModel, $Out> {
+  _DefinitionModelCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<WordModel> $mapper =
-      WordModelMapper.ensureInitialized();
+  late final ClassMapperBase<DefinitionModel> $mapper =
+      DefinitionModelMapper.ensureInitialized();
   @override
-  ListCopyWith<
-    $R,
-    PhoneticModel,
-    PhoneticModelCopyWith<$R, PhoneticModel, PhoneticModel>
-  >
-  get phonetics => ListCopyWith(
-    $value.phonetics,
-    (v, t) => v.copyWith.$chain(t),
-    (v) => call(phonetics: v),
-  );
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get synonyms =>
+      ListCopyWith(
+        $value.synonyms,
+        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v) => call(synonyms: v),
+      );
   @override
-  ListCopyWith<
-    $R,
-    MeaningModel,
-    MeaningModelCopyWith<$R, MeaningModel, MeaningModel>
-  >
-  get meanings => ListCopyWith(
-    $value.meanings,
-    (v, t) => v.copyWith.$chain(t),
-    (v) => call(meanings: v),
-  );
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get antonyms =>
+      ListCopyWith(
+        $value.antonyms,
+        (v, t) => ObjectCopyWith(v, $identity, t),
+        (v) => call(antonyms: v),
+      );
   @override
   $R call({
-    String? word,
-    Object? phonetic = $none,
-    List<PhoneticModel>? phonetics,
-    List<MeaningModel>? meanings,
+    String? definition,
+    Object? example = $none,
+    List<String>? synonyms,
+    List<String>? antonyms,
   }) => $apply(
     FieldCopyWithData({
-      if (word != null) #word: word,
-      if (phonetic != $none) #phonetic: phonetic,
-      if (phonetics != null) #phonetics: phonetics,
-      if (meanings != null) #meanings: meanings,
+      if (definition != null) #definition: definition,
+      if (example != $none) #example: example,
+      if (synonyms != null) #synonyms: synonyms,
+      if (antonyms != null) #antonyms: antonyms,
     }),
   );
   @override
-  WordModel $make(CopyWithData data) => WordModel(
-    word: data.get(#word, or: $value.word),
-    phonetic: data.get(#phonetic, or: $value.phonetic),
-    phonetics: data.get(#phonetics, or: $value.phonetics),
-    meanings: data.get(#meanings, or: $value.meanings),
+  DefinitionModel $make(CopyWithData data) => DefinitionModel(
+    definition: data.get(#definition, or: $value.definition),
+    example: data.get(#example, or: $value.example),
+    synonyms: data.get(#synonyms, or: $value.synonyms),
+    antonyms: data.get(#antonyms, or: $value.antonyms),
   );
 
   @override
-  WordModelCopyWith<$R2, WordModel, $Out2> $chain<$R2, $Out2>(
+  DefinitionModelCopyWith<$R2, DefinitionModel, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _WordModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
+  ) => _DefinitionModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class ApiErrorModelMapper extends ClassMapperBase<ApiErrorModel> {
